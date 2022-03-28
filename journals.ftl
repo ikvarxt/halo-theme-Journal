@@ -14,26 +14,20 @@
                     Journals
                 </div>
             </div>
-
-            <div class="post-body-wrapper">
-                <div class="post-body">
-<pre>
-[
-<#list journals.content?sort_by('createTime')?reverse as journal>
-    {
-        id: ${journal.id!},
-        createTime: "${journal.createTime?string('yyyy-MM-dd HH:mm:ss')}",
-        content: "${journal.content!}"
-        <#if journal_has_next>
-    },
-    <#else>
-    }
-    </#if>
-</#list>
-]
-</pre>
+            <#list journals.content?sort_by("createTime")?reverse as journal>
+                <div class="post-item-wrapper">
+                    <div class="post-item post-item-no-gaps">
+                        <div class="post-item-info-wrapper">
+                            <div class="post-item-title"  style="font-size: medium; text-decoration: none !important;">
+                                ${journal.content!}
+                            </div>
+                            <div class="post-item-meta"  style="font-size: small;">
+                                ${journal.createTime?string('yyyy-MM-dd HH:mm')}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </#list>
         </div>
     </div>
     <#include "layout/_include/single_column_footer.ftl">
